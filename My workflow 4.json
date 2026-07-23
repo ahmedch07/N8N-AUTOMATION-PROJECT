@@ -1,0 +1,138 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -368,
+        -208
+      ],
+      "id": "65c61a23-6104-465c-bbe9-79d71df4a477",
+      "name": "When chat message received",
+      "webhookId": "a86f03c1-64e6-40e6-b2bb-bf0694279938"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -128,
+        -208
+      ],
+      "id": "060dfe5b-93bb-49a9-b220-6f73549b2890",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "search record in airtable\n",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appzJZ04m5ctadUOt",
+          "mode": "list",
+          "cachedResultName": "Pharmacy Store Inventory",
+          "cachedResultUrl": "https://airtable.com/appzJZ04m5ctadUOt"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZMK8vaOtrtUBEn",
+          "mode": "list",
+          "cachedResultName": "Inventory",
+          "cachedResultUrl": "https://airtable.com/appzJZ04m5ctadUOt/tblZMK8vaOtrtUBEn"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.2,
+      "position": [
+        32,
+        0
+      ],
+      "id": "29f5c28f-b2c6-4352-9b07-5c635037ddde",
+      "name": "Search records in Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "cCGG0H7bAPRnG7YR",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -272,
+        0
+      ],
+      "id": "8e9e8983-e41d-4846-9c40-e06d78449545",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "UZEkcTNO7EiX68rb",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records in Airtable": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "94226837-c5fc-422e-ab10-48a7c2f2242e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0bb91778b97c130d1476c332cc181d884281f77fa391c934580ba0e4814c911a"
+  },
+  "nodeGroups": [],
+  "id": "9BXXGM5eiAUNZNaI",
+  "tags": []
+}
